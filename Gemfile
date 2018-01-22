@@ -13,6 +13,7 @@ gem 'coffee-rails',            '4.2.2'
 gem 'jquery-rails',            '4.3.1'
 gem 'turbolinks',              '5.0.1'
 gem 'jbuilder',                '2.7.0'
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'
