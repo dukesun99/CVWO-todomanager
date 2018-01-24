@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+  <%= form_for(@task) do |f| %>
+    
+      <%= render 'shared/error_messages' %>
+
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control' %>
+
+      <%= f.label :detail %>
+      <%= f.text_field :detail, class: 'form-control' %>
+
+      <%= f.label :due_date %>
+      <%= f.date_field :due_date %>
+
+      <%= f.label :category %>
+      <%= f.text_field :category %>
+      
+      <% if !current_user.nil? %>
+      <%= f.submit "Update task", class: "btn btn-primary" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

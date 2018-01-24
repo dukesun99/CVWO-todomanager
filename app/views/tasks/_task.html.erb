@@ -1,0 +1,9 @@
+<li>
+    <%= @task.title %>
+</li>
+<li>
+  <% if current_user.admin? %>
+    | <%= link_to "delete", task, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+  <% end %>
+</li>

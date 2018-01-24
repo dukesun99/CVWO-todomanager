@@ -7,5 +7,18 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
+  
+  #concern :taskable do 
+  #  resources :tasks
+  #end
+
   resources :users
+  #resources :teams, concerns: :taskable
+
+  get 'teams/:team_id/tasks', to: 'tasks#index_team'
+  get 'users/:user_id/tasks', to: 'tasks#index_user', as: 'my_tasks'
+  resources :tasks
+  
+  
+
 end

@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+  <%= form_for(@task) do |f| %>
+    
+    
+
+      <%= render 'shared/error_messages' %>
+
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control' %>
+
+      <%= f.label :detail %>
+      <%= f.text_field :detail, class: 'form-control' %>
+
+      <%= f.label :due_date %>
+      <%= f.date_field :due_date %>
+
+      <% if !current_user.nil? %>
+      <%= radio_button_tag(:father_id, 0 ) %>
+      <%= label_tag(:my_self, "Create task for my self") %>
+      <% if !current_user.teams.nil? %>
+        <% current_user.teams.each do |team| %>
+        <%= radio_button_tag(:father_id, team.id) %>
+        <%= label_tag(team.name, "Create task for team #{team.name}") %>
+        <% end %>
+      <% end %>
+      <% else %>
+      <p>Please log in before you proceed</p>
+      <% end %>
+      <br><br>
+      <%= f.label :category %>
+      <%= f.text_field :category %>
+      
+      <% if !current_user.nil? %>
+      <%= f.submit "Create task", class: "btn btn-primary" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+  <table class="table table-striped">
+  <tbody>
+      <tr>
+        <td>Task title:  </td>
+        <td><%= @task.title %></td>
+      </tr>
+      <tr>
+        <td>Task detail:  </td>
+        <td><%= @task.detail %></td>
+      </tr>
+      <tr>
+        <td>Task due date:  </td>
+        <td><%= @task.due_date %></td>
+      </tr>
+      <tr>
+        <td>Task category:  </td>
+        <td><%= @task.category %></td>
+      </tr>
+  </tbody>
+</table>
+  <div class="center">
+  <%= link_to "Edit task", edit_task_path(@task), class: "btn btn-primary"%>
+  </div>
+  </div>
+</div>

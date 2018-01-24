@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  detail: MyText
+  due_date: 2018-01-22 22:58:25
+  importance: 1
+  category: MyString
+  category: one
+  taskable: one
+
+two:
+  title: MyString
+  detail: MyText
+  due_date: 2018-01-22 22:58:25
+  importance: 1
+  category: MyString
+  category: two
+  taskable: two
