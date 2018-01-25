@@ -27,10 +27,11 @@
 </table>
   <div class="center">
   <% if current_user?(User.find(@team.admin_id)) %>
-    <%= link_to "Edit team", edit_team_path(@team), class: "btn btn-primary"%>
+    <%= link_to "Edit team", edit_team_path(@team), class: "btn btn-primary" %>
   <% end %>
   <% if @team.users.include?(current_user) %>
-    <%= link_to "Team tasks", team_tasks_path(@team), class: "btn btn-primary"%>
+    <%= link_to "Team tasks", team_tasks_path(@team), class: "btn btn-primary" %>
+    <%= link_to "Team members", team_members_path(@team), class: "btn btn-primary" %>
   <% end %>
   </div>
   </div>

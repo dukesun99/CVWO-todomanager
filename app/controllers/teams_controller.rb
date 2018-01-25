@@ -12,6 +12,10 @@ class TeamsController < ApplicationController
     @teams = Team.all
   end
 
+  def index_member
+    @users = Team.find(params[:team_id]).users
+  end
+
   def new
     @team = Team.new
   end
