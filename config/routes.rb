@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :users
   resources :teams
 
-  get 'teams/:team_id/tasks', to: 'tasks#index_team'
+  get 'teams/:team_id/tasks', to: 'tasks#index_team', as: 'team_tasks'
   get 'users/:user_id/tasks', to: 'tasks#index_user', as: 'my_tasks'
   get 'users/:user_id/teams', to: 'teams#index_user', as: 'my_teams'
   resources :tasks

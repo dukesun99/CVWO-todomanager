@@ -65,6 +65,10 @@ class TeamsController < ApplicationController
     end
   end 
 
+  def apply_team
+    team_now = Team.find(params[:id])
+  end
+
   private
     def team_params
       params.require(:team).permit(:name, :description, :invition_code)

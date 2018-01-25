@@ -22,10 +22,14 @@
         </tr>
       <% end %>
 
+
   </tbody>
 </table>
   <div class="center">
   <%= link_to "Edit team", edit_team_path(@team), class: "btn btn-primary"%>
+  <% if @team.users.include?(current_user) %>
+    <%= link_to "Team tasks", team_tasks_path(@team), class: "btn btn-primary"%>
+  <% end %>
   </div>
   </div>
 </div>

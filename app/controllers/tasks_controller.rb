@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
     before_action :correct_user, only: [:index_user]
+    #before_action :team_accessable, only: [:index_team]
     before_action :logged_in_user, only: [:index_team, :new, :edit, :update, :destroy]
 
     def index_user
@@ -9,7 +10,12 @@ class TasksController < ApplicationController
 
     def index_team
         team_now = Team.find(params[:team_id])
-        @tasks = team_now.tasks.paginate(page: params[:page]) if member_checker(team_now)
+        if team_now.users.include?(current_user)
+            @tasks = team_now.tasks
+        else
+            flash[:danger] = "You have no access to the task list of the team"
+            redirect_to teams_path
+        end
     end
 
     def show
@@ -95,6 +101,7 @@ class TasksController < ApplicationController
             @user_now = User.find(params[:user_id])
             redirect_to(root_url) unless current_user?(@user_now)
         end
+
 
         def permittion_checker (tsk)
             if tsk.taskable_type == "User"
