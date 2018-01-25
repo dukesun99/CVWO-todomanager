@@ -7,6 +7,7 @@
       <th>Title</th>
       <th>due_date</th>
       <th>category</th>
+      <th>From</th>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +17,11 @@
         <td><%= task.title %></td>
         <td><%= task.due_date %></td>
         <td><%= task.category %></td>
+          <% if task.taskable_type == "User" %>
+            <td>My personal tasks</td>
+          <% else %>
+            <td><%= task.taskable.name %>
+          <% end %> 
         <td><%= link_to "details", task %></td>
         <td><%= link_to "delete", task, method: :delete,
                                   data: { confirm: "You sure?" } %></td>

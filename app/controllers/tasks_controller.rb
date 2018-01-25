@@ -5,7 +5,15 @@ class TasksController < ApplicationController
 
     def index_user
         user_now = User.find(params[:user_id])
-        @tasks = user_now.tasks
+        tasks = user_now.tasks.dup
+        if !user_now.teams.nil?
+            user_now.teams.each do |team|
+                if !team.tasks.nil?
+                    tasks = tasks + team.tasks
+                end
+            end
+        end
+        @tasks = tasks
     end
 
     def index_team
@@ -29,19 +37,22 @@ class TasksController < ApplicationController
             if @task.save
                 flash[:success] = "Task created successfully!"
                 #redirect_to "/users/#{user_now.id}/tasks"
-                render 'new'
+                redirect_to my_tasks_path(user_now)
             else
                 render 'new'
             end
         else
             if params[:father_id] == nil
                 flash[:danger] = "You must select one team or user to create this task with"
+                render 'new'
             else
                 team_now = Team.find(params[:father_id])
-                @task = team_now.tasks.new(params.require(:task).permit(:title, :detail, :due_date, :importance, :category))
+                @task = Task.new(params.require(:task).permit(:title, :detail, :due_date, :importance, :category))
+                #@task.taskable_type = 'Team'
+                @task.taskable = team_now
                 if @task.save
-                    flash[:success] = "Task created successfully!"
-                    render 'new'
+                    flash[:success] = "Task created successfully with team #{@task.taskable.name}"
+                    redirect_to team_tasks_path(team_now)
                 else
                     render 'new'
                 end
