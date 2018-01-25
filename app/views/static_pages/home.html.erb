@@ -5,8 +5,11 @@
     This is the home page for the
     todo manager.
   </h2>
-
-  <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+  <% if current_user.nil? %>
+    <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+  <% else %>
+    <%= link_to "View my tasks", my_tasks_path(current_user), class: "btn btn-lg btn-primary" %>
+  <% end %>
 </div>
 
 <div class="alert alert-warning">Disclaimer: In the open test period, your data may be removed anytime. The website owner is not responsible for any lose of data.</div>
