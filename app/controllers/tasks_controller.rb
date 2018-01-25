@@ -42,8 +42,9 @@ class TasksController < ApplicationController
                 render 'new'
             end
         else
-            if params[:father_id] == nil
+            if params[:father_id].nil?
                 flash[:danger] = "You must select one team or user to create this task with"
+                @task = Task.new
                 render 'new'
             else
                 team_now = Team.find(params[:father_id])
