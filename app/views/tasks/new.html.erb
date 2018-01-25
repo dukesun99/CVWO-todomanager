@@ -17,7 +17,7 @@
 
       <% if !current_user.nil? %>
       <%= radio_button_tag(:father_id, 0 ) %>
-      <%= label_tag(:my_self, "Create task for my self") %>
+      <%= label_tag(:my_self, "Create task for myself") %>
       <% if !current_user.teams.nil? %>
         <% current_user.teams.each do |team| %>
         <%= radio_button_tag(:father_id, team.id) %>

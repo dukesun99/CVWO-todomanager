@@ -28,6 +28,10 @@ class TasksController < ApplicationController
 
     def show
         @task = Task.find(params[:id])
+        if !permittion_checker(@task)
+            flash[:danger] = "You have no access to this task!"
+            redirect_to my_tasks_path(current_user)
+        end
     end
 
     def create
