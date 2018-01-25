@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
     before_action :correct_user, only: [:index_user]
+    before_action :logged_in_user, only: [:index_team, :new, :edit, :update, :destroy]
 
     def index_user
         user_now = User.find(params[:user_id])
@@ -28,7 +29,7 @@ class TasksController < ApplicationController
             end
         else
             if params[:father_id] == nil
-                flash[:error] = "You must select one team or user to create this task with"
+                flash[:danger] = "You must select one team or user to create this task with"
             else
                 team_now = Team.find(params[:father_id])
                 @task = team_now.tasks.new(params.require(:task).permit(:title, :detail, :due_date, :importance, :category))
@@ -68,7 +69,7 @@ class TasksController < ApplicationController
             flash[:success] = "Task deleted"
             redirect_to my_tasks_path(current_user)
         else
-            flash[:error] = "Internal error! Please contact admin for help!"
+            flash[:danger] = "Internal error! Please contact admin for help!"
             redirect_to my_tasks_path(current_user)
         end
       end

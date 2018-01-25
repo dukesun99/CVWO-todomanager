@@ -1,0 +1,21 @@
+<% provide(:title, 'New team') %>
+<h1>New team</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@team) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :description %>
+      <%= f.text_field :description, class: 'form-control' %>
+
+      <%= f.label :invition_code %>
+      <%= f.text_field :invition_code, class: 'form-control' %>
+
+      <%= f.submit "Create my team", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

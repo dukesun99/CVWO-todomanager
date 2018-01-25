@@ -13,10 +13,11 @@ Rails.application.routes.draw do
   #end
 
   resources :users
-  #resources :teams, concerns: :taskable
+  resources :teams
 
   get 'teams/:team_id/tasks', to: 'tasks#index_team'
   get 'users/:user_id/tasks', to: 'tasks#index_user', as: 'my_tasks'
+  get 'users/:user_id/teams', to: 'teams#index_user', as: 'my_teams'
   resources :tasks
   
   

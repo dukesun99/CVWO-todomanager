@@ -1,0 +1,31 @@
+<% provide(:title, 'All teams') %>
+<h1>All teams</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Owner</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if !@teams.nil? %>
+    <% @teams.each do |team| %>
+      <tr>
+        <td><%= team.name %></td>
+        <td><%= team.description %></td>
+        <td><%= User.find(team.admin_id).name %></td>
+        <td><%= link_to "details", team %></td>
+        <% if current_user?(User.find(team.admin_id)) %>
+          <td><%= link_to "delete", team, method: :delete,
+                                    data: { confirm: "You sure?" } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+<div class="center">
+  <%= link_to "New team", new_team_path, class: "btn btn-primary"%>
+</div>

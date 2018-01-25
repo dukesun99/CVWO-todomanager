@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+  <table class="table table-striped">
+  <tbody>
+      <tr>
+        <td>Team name:  </td>
+        <td><%= @team.name %></td>
+      </tr>
+      <tr>
+        <td>Team detail:  </td>
+        <td><%= @team.description %></td>
+      </tr>
+      <tr>
+        <td>Team admin:  </td>
+        <td><%= User.find(@team.admin_id).name %></td>
+      </tr>
+      <% if current_user?(User.find(@team.admin_id)) %>
+        <tr>
+          <td>Invition code:  </td>
+          <td><%= @team.invition_code %></td>
+        </tr>
+      <% end %>
+
+  </tbody>
+</table>
+  <div class="center">
+  <%= link_to "Edit team", edit_team_path(@team), class: "btn btn-primary"%>
+  </div>
+  </div>
+</div>
