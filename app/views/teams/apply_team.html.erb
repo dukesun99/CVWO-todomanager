@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+  <div class="middle">
+    <h3>Join team <%= @team.name %></h3>
+    <p>Please contact team admin to get the invition code</p>
+  </div>
+
+  <%= form_tag controller: "teams", action: "add_user", method: "post" do %> 
+    
+      <%= render 'shared/error_messages' %>
+
+      <label for="invition_code">invition code</label><br>  
+      <%= text_field_tag :invition_code,params[:invition_code] %><br> 
+      
+      <% if !current_user.nil? %>
+      <%= submit_tag "Join the team", class: "btn btn-primary" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -66,7 +66,19 @@ class TeamsController < ApplicationController
   end 
 
   def apply_team
-    team_now = Team.find(params[:id])
+    @team = Team.find(params[:team_id])
+  end
+
+  def add_user
+    team_now = Team.find(params[:team_id])
+    if team_now.invition_code == params[:invition_code] && !team_now.users.include?(current_user)
+      team_now.users << current_user
+      flash[:success] = "You successfully joined the team!"
+      redirect_to team_now
+    else
+      flash[:danger] = "Failed to join the team. Maybe you entered invalid invition code or you are already in the team."
+      redirect_to teams_path
+    end
   end
 
   private
@@ -83,6 +95,7 @@ class TeamsController < ApplicationController
 
     def is_admin
       @team = Team.find(params[:id])
+      flash[:danger] = "You have no right to access this page!"
       redirect_to(root_url) unless current_user?(User.find(@team.admin_id))
     end
 end

@@ -9,9 +9,9 @@ class TasksController < ApplicationController
     end
 
     def index_team
-        team_now = Team.find(params[:team_id])
-        if team_now.users.include?(current_user)
-            @tasks = team_now.tasks
+        @team_now = Team.find(params[:team_id])
+        if @team_now.users.include?(current_user)
+            @tasks = @team_now.tasks
         else
             flash[:danger] = "You have no access to the task list of the team"
             redirect_to teams_path
@@ -108,7 +108,7 @@ class TasksController < ApplicationController
                 return tsk.taskable == current_user
             else
                 if tsk.taskable_type == "Team"
-                    if current_user.teams.users.include?(current_user)
+                    if tsk.taskable.users.include?(current_user)
                         return true
                     else
                         return false

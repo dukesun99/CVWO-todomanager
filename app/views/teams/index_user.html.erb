@@ -17,8 +17,10 @@
         <td><%= team.description %></td>
         <td><%= User.find(team.admin_id).name %></td>
         <td><%= link_to "details", team %></td>
+        <% if current_user?(User.find(team.admin_id)) %>
         <td><%= link_to "delete", team, method: :delete,
                                   data: { confirm: "You sure?" } %></td>
+        <% end %>
       </tr>
     <% end %>
     <% end %>
