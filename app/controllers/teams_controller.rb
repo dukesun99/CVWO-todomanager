@@ -1,6 +1,7 @@
 class TeamsController < ApplicationController
   before_action :logged_in_user, only:[:index, :new]
   before_action :is_admin, only:[:edit, :update]
+  before_action :in_team, only:[:index_member]
   def index_user
     user_now = current_user
     if !user_now.nil?
@@ -99,7 +100,17 @@ class TeamsController < ApplicationController
 
     def is_admin
       @team = Team.find(params[:id])
-      flash[:danger] = "You have no right to access this page!"
-      redirect_to(root_url) unless current_user?(User.find(@team.admin_id))
+      if !current_user?(User.find(@team.admin_id))
+        flash[:danger] = "You have no right to access this page!"
+        redirect_to(root_url)
+      end
+    end
+
+    def in_team 
+      @team = Team.find(params[:team_id])
+      if !@team.users.include?(current_user)
+        flash[:danger] = "You have no right to access this page!"
+        redirect_to(root_url)
+      end
     end
 end
